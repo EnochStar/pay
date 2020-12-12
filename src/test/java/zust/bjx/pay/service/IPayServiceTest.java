@@ -1,5 +1,6 @@
 package zust.bjx.pay.service;
 
+import com.lly835.bestpay.enums.BestPayTypeEnum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,6 @@ public class IPayServiceTest {
     @Test
     public void create() {
         //BigDecimal.valueOf(0.01)  »ò new BigDecimal("0.01")
-        ipayService.create("123321", BigDecimal.valueOf(0.01));
+        ipayService.create("123321", BigDecimal.valueOf(0.01), BestPayTypeEnum.WXPAY_NATIVE);
     }
 }

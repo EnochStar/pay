@@ -1,5 +1,6 @@
 package zust.bjx.pay.service;
 
+import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayResponse;
 
 import java.math.BigDecimal;
@@ -18,5 +19,11 @@ public interface IPayService {
      * @param amount 金额
      * 创建发起支付
      */
-    PayResponse create(String orderId, BigDecimal amount);
+    PayResponse create(String orderId, BigDecimal amount, BestPayTypeEnum bestPayTypeEnum);
+
+    /**
+     * @param notifyData 通知数据
+     * 异步通知处理
+     */
+    String asyncNotify(String notifyData);
 }
