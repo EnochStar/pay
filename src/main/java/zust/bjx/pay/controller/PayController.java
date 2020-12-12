@@ -1,5 +1,9 @@
 package zust.bjx.pay.controller;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePageMergePayRequest;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import zust.bjx.pay.config.AlipayConfig;
 import zust.bjx.pay.service.impl.PayService;
 
+import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
