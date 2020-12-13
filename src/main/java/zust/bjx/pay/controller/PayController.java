@@ -16,7 +16,8 @@ import zust.bjx.pay.config.AlipayConfig;
 import zust.bjx.pay.config.BestPayConfig;
 import zust.bjx.pay.config.WxAccountConfig;
 import zust.bjx.pay.pojo.PayInfo;
-import zust.bjx.pay.service.impl.PayService;
+
+import zust.bjx.pay.service.impl.PayServiceImpl;
 
 import javax.xml.transform.Result;
 import java.math.BigDecimal;
@@ -36,7 +37,7 @@ import java.util.Map;
 public class PayController {
 
     @Autowired
-    private PayService payService;
+    private PayServiceImpl payService;
 
     @Autowired
     private WxAccountConfig wxAccountConfig;
