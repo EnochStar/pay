@@ -23,7 +23,7 @@ import java.math.BigDecimal;
  * @author EnochStar
  * @title: PayService
  * @projectName pay
- * @description: TODO
+ * @description:
  * @date 2020/12/720:03
  */
 @Slf4j
@@ -88,6 +88,9 @@ public class PayService implements IPayService {
             // 由updateByPrimaryKeySelective可知 将updateTime设置为null即可
             payInfoMapper.updateByPrimaryKeySelective(payInfo);
         }
+        //TODO pay发送MQ消息，mall接收MQ消息
+
+
 
         //4.告诉微信不要再通知了
         if (payResponse.getPayPlatformEnum() == BestPayPlatformEnum.WX) {
@@ -99,5 +102,11 @@ public class PayService implements IPayService {
             return "success";
         }
         throw new RuntimeException("异步通知中，错误的支付平台");
+    }
+
+    @Override
+    public PayInfo queryByOrderId(String orderId) {
+        PayInfo payInfo = payInfoMapper.selectByOrderNo(Long.parseLong(orderId));
+        return payInfo;
     }
 }

@@ -7,7 +7,7 @@ import com.lly835.bestpay.service.BestPayService;
  * @author EnochStar
  * @title: PayPlatformEnum
  * @projectName pay
- * @description: TODO
+ * @description:
  * @date 2020/12/12 16:05
  */
 public enum PayPlatformEnum {

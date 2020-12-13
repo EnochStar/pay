@@ -4,6 +4,7 @@ import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePageMergePayRequest;
+import com.lly835.bestpay.config.WxPayConfig;
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import zust.bjx.pay.config.AlipayConfig;
+import zust.bjx.pay.config.BestPayConfig;
+import zust.bjx.pay.config.WxAccountConfig;
+import zust.bjx.pay.pojo.PayInfo;
 import zust.bjx.pay.service.impl.PayService;
 
 import javax.xml.transform.Result;
@@ -34,6 +38,9 @@ public class PayController {
     @Autowired
     private PayService payService;
 
+    @Autowired
+    private WxAccountConfig wxAccountConfig;
+
     @GetMapping("/create")
     public ModelAndView create(@RequestParam("orderId") String orderId,
                                @RequestParam("amount") BigDecimal amount,
@@ -45,6 +52,8 @@ public class PayController {
         // 支付方式不同 渲染不同
         if (bestPayTypeEnum == BestPayTypeEnum.WXPAY_NATIVE){
             map.put("codeUrl",payResponse.getCodeUrl());
+            map.put("orderId",orderId);
+            map.put("returnUrl",wxAccountConfig.getReturnUrl());
             return new ModelAndView("createForWxNative",map);
         }else if(bestPayTypeEnum == BestPayTypeEnum.ALIPAY_PC){
             map.put("body",payResponse.getBody());
@@ -57,5 +66,12 @@ public class PayController {
     @ResponseBody
     public String asyncNotify(@RequestBody String notifyData) {
          return payService.asyncNotify(notifyData);
+    }
+
+    @GetMapping("/queryByOrderId")
+    @ResponseBody
+    public PayInfo queryByOrderId(@RequestParam String orderId) {
+        log.info("查询支付记录...");
+        return payService.queryByOrderId(orderId);
     }
 }

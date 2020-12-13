@@ -2,6 +2,7 @@ package zust.bjx.pay.service;
 
 import com.lly835.bestpay.enums.BestPayTypeEnum;
 import com.lly835.bestpay.model.PayResponse;
+import zust.bjx.pay.pojo.PayInfo;
 
 import java.math.BigDecimal;
 
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
  * @author EnochStar
  * @title: IPayService
  * @projectName pay
- * @description: TODO
+ * @description:
  * @date 2020/12/720:01
  */
 public interface IPayService {
@@ -26,4 +27,11 @@ public interface IPayService {
      * 异步通知处理
      */
     String asyncNotify(String notifyData);
+
+    /**
+     * 查询支付记录 通过订单号
+     * @param orderId
+     * @return
+     */
+    PayInfo queryByOrderId(String orderId);
 }
